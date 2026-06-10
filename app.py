@@ -55,3 +55,105 @@ if st.button("Randomize PC Build", key="pc_btn"):
     st.markdown(f"**CPU:** {selected_cpu}")
     st.markdown(f"**RAM:** {selected_ram}")
     st.markdown(f"**Storage:** {selected_storage}")
+st.header("💰 Budget-Based PC Builder")
+st.write("Type your budget and select your preference to get a working configuration.")
+
+# Input for custom dollar amount
+budget = st.number_input(
+    "Enter your custom PC budget ($)",
+    min_value=0,
+    max_value=100000,
+    value=1000,
+    step=50
+)
+
+# Radio selection to determine build strategy
+parts_condition = st.radio(
+    "What kind of parts are you looking for?",
+    options=["Only New Parts", "Include Used Parts"],
+    horizontal=True
+)
+
+if st.button("Generate Compatible Build", key="budget_btn"):
+
+    # ------------------------------------------
+    # STRATEGY A: INCLUDE USED PARTS
+    # ------------------------------------------
+    if parts_condition == "Include Used Parts":
+        if budget < 150:
+            st.warning(
+                "⚠️ Budgets under $150 are too tight for a custom build. Look for a refurbished office PC on eBay.")
+
+        elif 150 <= budget < 400:
+            st.success("📦 **Tier: Ultra-Budget Used King**")
+            st.markdown("**CPU:** AMD Ryzen 5 3600 (Used)")
+            st.markdown("**Motherboard:** Any budget B450 AM4 Motherboard (Used)")
+            st.markdown("**RAM:** 16GB (2x8GB) DDR4 3200MHz")
+            st.markdown("**GPU:** AMD Radeon RX 580 8GB or GTX 1660 Super (Used)")
+            st.markdown("**Storage:** 512GB NVMe M.2 SSD")
+            st.markdown("**Case:** Any budget case under $40")
+            st.markdown("**Power Supply:** 500W 80+ Bronze Certified")
+
+        elif 400 <= budget < 800:
+            st.success("🚀 **Tier: Mid-Range Value Used Build**")
+            st.markdown("**CPU:** AMD Ryzen 5 5600 (Used/New)")
+            st.markdown("**Motherboard:** MSI B550M PRO-VDH WiFi")
+            st.markdown("**RAM:** 32GB (2x16GB) DDR4 3200MHz")
+            st.markdown("**GPU:** NVIDIA RTX 3070 8GB or AMD RX 6700 XT 12GB (Used)")
+            st.markdown("**Storage:** 1TB NVMe PCIe 4.0 M.2 SSD")
+            st.markdown("**Case:** Montech AIR 100 LITE")
+            st.markdown("**Power Supply:** 650W 80+ Gold Certified")
+
+        else:
+            st.info(
+                "💡 High budgets are better spent on brand-new generation parts. Check out the 'Only New Parts' configuration!")
+
+    # ------------------------------------------
+    # STRATEGY B: ONLY NEW PARTS
+    # ------------------------------------------
+    else:
+        if budget < 300:
+            st.warning(
+                "⚠️ High-performance modern operating parts generally require at least a $300 budget when buying exclusively brand new.")
+
+        elif 300 <= budget < 500:
+            st.success("🎮 **Tier: New Ultra-Budget APU Build (No Dedicated GPU)**")
+            st.markdown("**CPU:** AMD Ryzen 5 5600G (With AMD Radeon Vega Graphics)")
+            st.markdown("**Motherboard:** ASUS Prime B450M-A II")
+            st.markdown("**RAM:** 16GB (2x8GB) DDR4 3200MHz")
+            st.markdown("**GPU:** Integrated Radeon Graphics (Built into CPU, good for esports/indie games)")
+            st.markdown("**Storage:** 512GB NVMe M.2 SSD")
+            st.markdown("**Case:** Budget Micro-ATX Case with fans")
+            st.markdown("**Power Supply:** 500W 80+ Certified Power Supply")
+
+        elif 500 <= budget < 800:
+            st.success("🎮 **Tier: New Entry-Level 1080p Gaming**")
+            st.markdown("**CPU:** AMD Ryzen 5 5600 (Includes Cooler)")
+            st.markdown("**Motherboard:** MSI B550M PRO-VDH WiFi")
+            st.markdown("**RAM:** 16GB (2x8GB) DDR4 3200MHz")
+            st.markdown("**GPU:** AMD Radeon RX 6600 8GB")
+            st.markdown("**Storage:** 1TB NVMe M.2 SSD")
+            st.markdown("**Case:** Montech AIR 100 LITE")
+            st.markdown("**Power Supply:** 550W 80+ Bronze Certified")
+
+        elif 800 <= budget < 1500:
+            st.success("🔥 **Tier: New Mid-Range 1440p Powerhouse**")
+            st.markdown("**CPU:** AMD Ryzen 5 7600X")
+            st.markdown("**CPU Cooler:** Thermalright Peerless Assassin 120 SE")
+            st.markdown("**Motherboard:** MSI MAG B650 Tomahawk WiFi")
+            st.markdown("**RAM:** 32GB (2x16GB) DDR5 6000MHz CL30")
+            st.markdown("**GPU:** NVIDIA GeForce RTX 4070 Super 12GB")
+            st.markdown("**Storage:** 1TB NVMe PCIe 4.0 M.2 SSD")
+            st.markdown("**Case:** Corsair 4000D Airflow ATX")
+            st.markdown("**Power Supply:** 750W 80+ Gold Fully Modular")
+
+        else:
+            st.success("👑 **Tier: New High-End 4K Ultimate Build**")
+            st.markdown("**CPU:** AMD Ryzen 7 7800X3D")
+            st.markdown("**CPU Cooler:** Thermalright Phantom Spirit 120 EVO")
+            st.markdown("**Motherboard:** Gigabyte X870 AORUS Elite AX")
+            st.markdown("**RAM:** 64GB (2x32GB) DDR5 6000MHz CL30")
+            st.markdown("**GPU:** NVIDIA GeForce RTX 4080 Super 16GB")
+            st.markdown("**Storage:** 2TB NVMe PCIe 4.0 M.2 SSD")
+            st.markdown("**Case:** Lian Li Lancool 216 ATX")
+            st.markdown("**Power Supply:** 850W 80+ Gold ATX 3.0")
